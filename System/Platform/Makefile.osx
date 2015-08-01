@@ -1,0 +1,20 @@
+CC=g++
+OSXSDK= /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.7.sdk
+CFLAGS=-I../../API -I../../3rdParty/fssimplewindow/src -Wall -g3 -isysroot $(OSXSDK)
+SRC_DIR=./
+THIRDPARTY_SRC_DIR=../../3rdParty/fssimplewindow/src/macosx/
+LIB_DIR=.
+OUT_FILE=LIB_platform.osx.a
+DEFINES=-c -DMACOSX
+
+all:
+	# Compiling...
+	$(CC) $(CFLAGS) $(DEFINES) -c $(SRC_DIR)osx/platform.cpp -o platform.o
+	$(CC) $(CFLAGS) $(DEFINES) -c $(THIRDPARTY_SRC_DIR)fsmacosxwrapper.m -o fsmacosxwrapper.o
+	$(CC) $(CFLAGS) $(DEFINES) -c $(THIRDPARTY_SRC_DIR)fsmacosxwrappercpp.cpp -o fsmacosxwrappercpp.o
+
+	# Creating the static lib...
+	ar rcs $(LIB_DIR)/$(OUT_FILE) platform.o fsmacosxwrapper.o fsmacosxwrappercpp.o
+clean:
+	rm *.o
+	rm $(LIB_DIR)/$(OUT_FILE)
