@@ -171,7 +171,6 @@ void MyGame::OnRender(float elapsed){
 		pVideoInterface3D->Start3D();
 		
 		//pVideoInterface3D->RenderPrim3DVBO(g_pBox);
-
 		g_World.OnRender( elapsed );
 
 		pVideoInterface3D->SetViewport(NULL);

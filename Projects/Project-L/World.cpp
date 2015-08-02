@@ -14,10 +14,7 @@
 namespace {
 	Prim_t primGround;
 	PhysObject phys_ground;
-	Prim_t primSky;
-	PhysObject phys_sky;
 	PhysContainer g_PhysContainer;
-
 }
 
 World::World(){
@@ -25,7 +22,6 @@ World::World(){
 
 World::~World(){
 	free(primGround.verts);
-	free(primSky.verts);
 
 	ChunkList::iterator iterChunk = m_Chunks.begin();
 	while( iterChunk != m_Chunks.end() ){
@@ -81,37 +77,6 @@ void World::Init() {
 
 	g_PhysContainer.AddObject( &phys_ground );
 
-	
-	//SKY PRIM
-	HTEXTURE hSkyTex = pVideoInterface3D->CreateTexture("sky");
-	primSky.vPos.Set(0.0f, 512.0f, 0.0f);
-	primSky.hTex = hSkyTex;
-	primSky.count = 4;
-	primSky.verts = (Vert3d_t*)malloc(sizeof(Vert3d_t) * 4);
-	
-	primSky.verts[0].vPos.Set(-1024.0f, 0.0f, 1024.0f);
-	primSky.verts[0].vTexCoords.Set(0.0f, 0.0f);
-	primSky.verts[0].vColor.Set(1.0f, 1.0f, 1.0f, 1.0f);
-
-	primSky.verts[1].vPos.Set(1024.0f, 0.0f, 1024.0f);
-	primSky.verts[1].vTexCoords.Set(1.0f, 0.0f);
-	primSky.verts[1].vColor.Set(1.0f, 1.0f, 1.0f, 1.0f);
-
-	primSky.verts[2].vPos.Set(1024.0f, 0.0f, -1024.0f);
-	primSky.verts[2].vTexCoords.Set(1.0f, 1.0f);
-	primSky.verts[2].vColor.Set(1.0f, 1.0f, 1.0f, 1.0f);
-
-	primSky.verts[3].vPos.Set(-1024.0f, 0.0f, -1024.0f);
-	primSky.verts[3].vTexCoords.Set(0.0f, 1.0f);
-	primSky.verts[3].vColor.Set(1.0f, 1.0f, 1.0f, 1.0f);
-
-	primSky.Bake();
-
-	phys_sky.center.Set(0.0f, 512.0f, 0.0f);
-	phys_sky.halfwidths.Set(1024.0f, 16.0f, 1024.0f);
-
-	g_PhysContainer.AddObject( &phys_sky );
-
 	g_PhysContainer.center.Set(0.0f,0.0f,0.0f);
 	g_PhysContainer.halfwidths.Set(1024.0f,1024.0f,1024.0f);
 	PhysicsManager::GetInstance().AddContainer( &g_PhysContainer );
@@ -156,9 +121,9 @@ void World::OnRender( float elapsed ) {
 		return;
 	}
 
-	//Render ground and sky
+	//Render ground
 	pVideoInterface3D->RenderPrim3DVBO(&primGround);
-	pVideoInterface3D->RenderPrim3DVBO(&primSky);
+	
 
 	ChunkList::iterator iterChunk = m_Chunks.begin();
 	while( iterChunk != m_Chunks.end() ){

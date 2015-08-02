@@ -969,7 +969,7 @@ GEN_RESULT IVideoInterface3D::BeginScene() {
 	glEnable(GL_TEXTURE_2D);			// Enable Texture Mapping
 
     glBlendFunc(GL_SRC_ALPHA, GL_ONE);          // Set the blending function for translucency (note off at init time)
-    glClearColor(0.25f, 0.25f, 0.25f, 0.0f);	// This Will Clear The Background Color To Grey
+    glClearColor(0.5f, 0.5f, 0.75f, 0.0f);	// This Will Clear The Background Color To Blue-Grey
     glClearDepth(1.0);				// Enables Clearing Of The Depth Buffer
     glDepthFunc(GL_LESS);                       // type of depth test to do.
     glEnable(GL_DEPTH_TEST);                    // enables depth testing.

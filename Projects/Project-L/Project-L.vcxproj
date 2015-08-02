@@ -69,6 +69,10 @@
       <SubSystem>Windows</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy /y /c $(OutDir)$(TargetName)$(TargetExt) $(SolutionDir)..\bin
+xcopy /y /c $(OutDir)$(TargetName).pdb $(SolutionDir)..\bin</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -95,8 +99,8 @@
       <TargetMachine>MachineX86</TargetMachine>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /y /c $(OutDir)$(TargetName)$(TargetExt) $(SolutionDir)
-xcopy /y /c $(OutDir)$(TargetName).pdb $(SolutionDir)</Command>
+      <Command>xcopy /y /c $(OutDir)$(TargetName)$(TargetExt) $(SolutionDir)..\bin
+xcopy /y /c $(OutDir)$(TargetName).pdb $(SolutionDir)..\bin</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
