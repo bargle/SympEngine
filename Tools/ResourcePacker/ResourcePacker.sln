@@ -1,0 +1,35 @@
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ResourcePacker", "ResourcePacker.vcproj", "{37C5D993-E8D1-42B2-845B-153BE27A0228}"
+	ProjectSection(ProjectDependencies) = postProject
+		{FE8CCC86-B4AC-49AF-8612-3E96E5BD3115} = {FE8CCC86-B4AC-49AF-8612-3E96E5BD3115}
+		{D56E57E9-D57D-4138-B2A7-62432679A4DF} = {D56E57E9-D57D-4138-B2A7-62432679A4DF}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "fileio", "..\..\Common\FileIO\fileio.vcproj", "{FE8CCC86-B4AC-49AF-8612-3E96E5BD3115}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Compression", "..\..\Common\Compression\Compression.vcproj", "{D56E57E9-D57D-4138-B2A7-62432679A4DF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{37C5D993-E8D1-42B2-845B-153BE27A0228}.Debug|Win32.ActiveCfg = Debug|Win32
+		{37C5D993-E8D1-42B2-845B-153BE27A0228}.Debug|Win32.Build.0 = Debug|Win32
+		{37C5D993-E8D1-42B2-845B-153BE27A0228}.Release|Win32.ActiveCfg = Release|Win32
+		{37C5D993-E8D1-42B2-845B-153BE27A0228}.Release|Win32.Build.0 = Release|Win32
+		{FE8CCC86-B4AC-49AF-8612-3E96E5BD3115}.Debug|Win32.ActiveCfg = Debug|Win32
+		{FE8CCC86-B4AC-49AF-8612-3E96E5BD3115}.Debug|Win32.Build.0 = Debug|Win32
+		{FE8CCC86-B4AC-49AF-8612-3E96E5BD3115}.Release|Win32.ActiveCfg = Release|Win32
+		{FE8CCC86-B4AC-49AF-8612-3E96E5BD3115}.Release|Win32.Build.0 = Release|Win32
+		{D56E57E9-D57D-4138-B2A7-62432679A4DF}.Debug|Win32.ActiveCfg = Debug|Win32
+		{D56E57E9-D57D-4138-B2A7-62432679A4DF}.Debug|Win32.Build.0 = Debug|Win32
+		{D56E57E9-D57D-4138-B2A7-62432679A4DF}.Release|Win32.ActiveCfg = Release|Win32
+		{D56E57E9-D57D-4138-B2A7-62432679A4DF}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
