@@ -107,11 +107,18 @@ xcopy /y /c $(OutDir)$(TargetName).pdb $(SolutionDir)..\bin</Command>
     <ClCompile Include="Chunk.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Camera.h" />
+    <ClInclude Include="Chunk.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="GameObjectManager.h" />
     <ClInclude Include="Interfaces.h" />
+    <ClInclude Include="PhysicsManager.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="World.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\System\Core\Core.vcxproj">
