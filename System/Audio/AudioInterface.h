@@ -9,6 +9,8 @@
 #elif defined(__GNUC__)
 	#include "unix/AudioInterface.h"
 	#include "unix/AudioInterface_fmod.h"
+#elif defined (__APPLE__ && __MACH__ )
+	#include "osx/AudioInterface.h"
 #endif
 
 #endif

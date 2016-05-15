@@ -9,7 +9,7 @@
 
 #ifdef __APPLE__
 
-#ifdef MACOSX
+#ifdef __MACH__
 	#include <OpenGL/OpenGL.h>
 	
 	//#if CGL_VERSION_1_3
@@ -174,6 +174,8 @@ public:
 	#include "win32/VideoInterface3D_Impl.h"
 #elif defined(__IOS)
     #include "ios/VideoInterface3D_Impl.h"
+#elif defined( __APPLE__ ) && defined( __MACH__ )
+	#include "osx/VideoInterface3D_Impl.h"
 #elif defined(__GNUC__)
 	#include "unix/VideoInterface3D_Impl.h"
 #else

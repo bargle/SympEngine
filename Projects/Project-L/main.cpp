@@ -39,7 +39,11 @@ namespace {
 	  va_list args;
 	  va_start (args, format);
 	  vsnprintf (buffer,256,format, args);
+#if defined( __APPLE__ ) && defined( __MACH__ )
+        printf( buffer );
+#else
 	  OutputDebugString( buffer );
+#endif
 	  va_end (args);
 	}
 

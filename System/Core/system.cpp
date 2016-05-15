@@ -15,7 +15,30 @@
 #include "../Platform/platform.h"
 
 //FIXME: move this to a platform implementation class
-#ifdef __GNUC__
+#if defined( __APPLE__ ) && defined( __MACH__ )
+
+#include <GLFW/glfw3.h>
+
+extern "C" {
+void cb_keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods) {
+    
+    switch( action )
+    {
+        case GLFW_RELEASE:
+        {
+            g_pSystem->KeyEvent(key, 0, 0, 0);
+        }break;
+        case GLFW_PRESS:
+        {
+            g_pSystem->KeyEvent(key, 1, 0, 0);
+        }break;
+        default:
+            break;
+    }
+}
+}
+
+#elif defined( __GNUC__ )
     
     //FIXME: move this to a platform specific implementation class
 
