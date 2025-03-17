@@ -48,28 +48,29 @@ void World::Init() {
 	//ground prim
 	HTEXTURE hTexGrass = pVideoInterface3D->CreateTexture("grass");
 	primGround.vPos.Set(0.0f, -10.0f, 0.0f);
-	primGround.hTex = hTexGrass;
+    primGround.hTex = hTexGrass;
 	primGround.count = 4;
 	primGround.verts = (Vert3d_t*)malloc(sizeof(Vert3d_t) * 4);
 	
 	float extent = 1024.0f;
 
-	float uvScale = 128.0f;
-	primGround.verts[3].vPos.Set(-extent, 0.0f, extent);
-	primGround.verts[3].vTexCoords.Set(uvScale, 0.0f);
+	float uvScale = 32.0f;
+    
+    primGround.verts[0].vPos.Set(-extent, 0.0f, extent);
+    primGround.verts[0].vTexCoords.Set(0.0f, 0.0f);
+    primGround.verts[0].vColor.Set(1.0f, 1.0f, 1.0f, 1.0f);
+    
+    primGround.verts[1].vPos.Set(extent, 0.0f, extent);
+    primGround.verts[1].vTexCoords.Set(uvScale, 0.0f);
+    primGround.verts[1].vColor.Set(1.0f, 1.0f, 1.0f, 1.0f);
+    
+    primGround.verts[2].vPos.Set(extent, 0.0f, -extent);
+    primGround.verts[2].vTexCoords.Set(uvScale, uvScale);
+    primGround.verts[2].vColor.Set(1.0f, 1.0f, 1.0f, 1.0f);
+    
+	primGround.verts[3].vPos.Set(-extent, 0.0f, -extent);
+	primGround.verts[3].vTexCoords.Set(0.0f, uvScale);
 	primGround.verts[3].vColor.Set(1.0f, 1.0f, 1.0f, 1.0f);
-
-	primGround.verts[2].vPos.Set(extent, 0.0f, extent);
-	primGround.verts[2].vTexCoords.Set(uvScale, uvScale);
-	primGround.verts[2].vColor.Set(1.0f, 1.0f, 1.0f, 1.0f);
-
-	primGround.verts[1].vPos.Set(extent, 0.0f, -extent);
-	primGround.verts[1].vTexCoords.Set(0.0f, uvScale);
-	primGround.verts[1].vColor.Set(1.0f, 1.0f, 1.0f, 1.0f);
-
-	primGround.verts[0].vPos.Set(-extent, 0.0f, -extent);
-	primGround.verts[0].vTexCoords.Set(0.0f, 0.0f);
-	primGround.verts[0].vColor.Set(1.0f, 1.0f, 1.0f, 1.0f);
 
 	primGround.Bake();
 	phys_ground.center.Set(0.0f, -12.0f, 0.0f);
@@ -81,7 +82,7 @@ void World::Init() {
 	g_PhysContainer.halfwidths.Set(1024.0f,1024.0f,1024.0f);
 	PhysicsManager::GetInstance().AddContainer( &g_PhysContainer );
 
-
+#if !MACOSX //disable chunks for now on osx
 	#if 1
 	CPerformanceCounter counter;
 	counter.Start();
@@ -89,8 +90,8 @@ void World::Init() {
 		for( int x = 0; x < 4; ++x ) {
 			Chunk* pChunk = new Chunk;
 			Vector3d chunkPos;
-			chunkPos.Set( ( 64.0f * x ), -10.0f , ( 64.0f * y ) );
-            //chunkPos.Set(128.0f + (64.0f * x), -10.0f , 128.0f + (64.0f * y) );
+			//chunkPos.Set( ( 64.0f * x ), -10.0f , ( 64.0f * y ) );
+            chunkPos.Set(256.0f + (64.0f * x), -12.0f , 256.0f + (64.0f * y) );
 
 			pChunk->SetPos(chunkPos);
 			pChunk->Init();
@@ -112,6 +113,7 @@ void World::Init() {
 	}
 
 	#endif
+#endif
 	
 }
 
@@ -122,7 +124,11 @@ void World::OnRender( float elapsed ) {
 	}
 
 	//Render ground
-	pVideoInterface3D->RenderPrim3DVBO(&primGround);
+#if MACOSX
+    pVideoInterface3D->RenderPrim3D(&primGround); //VBO path not working on OSX
+#else
+    pVideoInterface3D->RenderPrim3DVBO(&primGround);
+#endif
 	
 
 	ChunkList::iterator iterChunk = m_Chunks.begin();

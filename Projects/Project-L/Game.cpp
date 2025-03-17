@@ -44,24 +44,27 @@ int MyGame::OnStartup(SympSystem* pSystem)
 	//////// 2D
 	HTEXTURE hTex = pVideoInterface3D->CreateTexture("test");
 	for(int i = 0; i < NUM_PRIMS; ++i) {
-		prim[i].vPos.Set( (float)i * 100.0f, (float)i * 50.0f, 0.0f);
+		//prim[i].vPos.Set( (float)(i+1) * 100.0f, (float)(i+1) * 50.0f, 0.0f);
+        prim[i].vPos.Set( 512.0f + ((float)(i+1) * 128.0f), 0.0f, 0.0f);
 		prim[i].hTex = hTex;
 		prim[i].count = 4;
 		prim[i].verts = (Vert3d_t*)malloc(sizeof(Vert3d_t) * 4);
+        
+        float pos_size = 32.0f;
 
 		prim[i].verts[0].vPos.Set(0.0f, 0.0f, 0.0f);
 		prim[i].verts[0].vTexCoords.Set(0.0f, 0.0f);
 		prim[i].verts[0].vColor.Set(0.0f, 1.0f, 1.0f, 1.0f);
 
-		prim[i].verts[1].vPos.Set(128.0f, 0.0f, 0.0f);
+		prim[i].verts[1].vPos.Set(pos_size, 0.0f, 0.0f);
 		prim[i].verts[1].vTexCoords.Set(1.0f, 0.0f);
 		prim[i].verts[1].vColor.Set(1.0f, 1.0f, 0.0f, 1.0f);
 
-		prim[i].verts[2].vPos.Set(128.0f, 128.0f, 0.0f);
+		prim[i].verts[2].vPos.Set(pos_size, pos_size, 0.0f);
 		prim[i].verts[2].vTexCoords.Set(1.0f, 1.0f);
 		prim[i].verts[2].vColor.Set(1.0f, 0.0f, 1.0f, 1.0f);
 
-		prim[i].verts[3].vPos.Set(0.0f, 128.0f, 0.0f);
+		prim[i].verts[3].vPos.Set(0.0f, pos_size, 0.0f);
 		prim[i].verts[3].vTexCoords.Set(0.0f, 1.0f);
 		prim[i].verts[3].vColor.Set(1.0f, 1.0f, 1.0f, 1.0f);
 	}
@@ -69,12 +72,13 @@ int MyGame::OnStartup(SympSystem* pSystem)
 	////////
 	if( pVideoInterface3D ) {
 		//const char* name, int width, int height, int char_width, int char_height, int rows, int columns
-		m_hFont = pVideoInterface3D->CreateHFont( "FreeMono", 128, 128, 12.8f, 22.0f, 5, 10 );
+		m_hFont = pVideoInterface3D->CreateHFont( "FreeMonoAlpha", 128, 128, 12.8f, 22.0f, 5, 10 );
 	}
 
 	g_World.Init();
 
-	g_Player.SetPos( Vector3d( 100.0, 65.0f, 300.0f ) );
+    Vector3d pos( 10.0f, 100.0f, 10.0f );
+	g_Player.SetPos( pos );
 
 	return 0;
 }
@@ -178,12 +182,12 @@ void MyGame::OnRender(float elapsed){
 		// Draw UI
 		pVideoInterface3D->Start2D();
 		
-		/*
+		
 		//add draw commands...
 		for(int i = 0 ; i < NUM_PRIMS; ++i){ 
 			pVideoInterface3D->RenderPrim2D(&prim[i]);
 		}
-		*/
+		
 
 		{
 		char buf[64];

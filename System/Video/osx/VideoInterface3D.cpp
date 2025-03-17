@@ -765,11 +765,11 @@ void Prim_t::Bake() {
 	//glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(Vert3dBaked_t) * numVertsBaked, vertsBaked); // Actually upload the data	
 	
 	glEnableVertexAttribArray( ATTRIB_POSITION );
-	glVertexAttribPointer( ATTRIB_POSITION, 3, GL_FLOAT, GL_FALSE, sizeof(Vert3d_t), &vertsBaked[0].pos );
+	glVertexAttribPointer( ATTRIB_POSITION, 3, GL_FLOAT, GL_FALSE, 0 /*sizeof(Vert3d_t)*/, &vertsBaked[0].pos );
     glEnableVertexAttribArray( ATTRIB_TEX );
-	glVertexAttribPointer( ATTRIB_TEX, 2, GL_FLOAT, GL_FALSE, sizeof(Vert3d_t), &vertsBaked[0].tex );
-    glEnableVertexAttribArray( ATTRIB_COLOR );	
-    glVertexAttribPointer( ATTRIB_COLOR, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(Vert3d_t), &vertsBaked[0].color ); //should be changed to unsigned chars
+	glVertexAttribPointer( ATTRIB_TEX, 2, GL_FLOAT, GL_FALSE, 0/*sizeof(Vert3d_t)*/, &vertsBaked[0].tex );
+    glEnableVertexAttribArray( ATTRIB_COLOR );
+    glVertexAttribPointer( ATTRIB_COLOR, 4, GL_UNSIGNED_BYTE, GL_TRUE, 0/*sizeof(Vert3d_t)*/, &vertsBaked[0].color ); //should be changed to unsigned chars
 	
 	//create ibo
 	if( ibo ) {
@@ -932,7 +932,7 @@ HTEXTURE IVideoInterface3D::CreateTexture(const char* name, TextureFormat_t form
 
     	tex.name = filename;
     	m_Textures.push_back(tex);
-    	//printf("load (%s)\n", name);
+    	printf("load (%s)\n", name);
     }else {
     	//error...
     	printf("can not load (%s)\n", filename);
@@ -1265,7 +1265,7 @@ GEN_RESULT IVideoInterface3D::RenderPrim3DVBO(Prim_t *pPrim) {
 
 	glDrawElements(GL_TRIANGLES, pPrim->numIdxBaked, GL_UNSIGNED_SHORT, BUFFER_OFFSET(0));
 
-	    GLenum result = glGetError();
+    GLenum result = glGetError();
     if ( result != GL_NO_ERROR ) {
     	//printf( "GL ERROR: %d (0x%x)\n", result, result );
     }
@@ -1602,8 +1602,8 @@ GEN_RESULT IVideoInterface3D::Start2D(){
     glDisable(GL_DEPTH_TEST);
 	glDisable(GL_CULL_FACE);
 	
-	//glBlendFunc(GL_SRC_ALPHA, GL_SRC_ONE_MINUS_ALPHA);
-	//glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glEnable(GL_BLEND);
 	
 	return RESULT_OK;
 }
