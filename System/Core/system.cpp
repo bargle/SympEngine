@@ -173,16 +173,30 @@ GEN_RESULT SympSystem::Resize(int nWidth, int nHeight) {
 
 GEN_RESULT SympSystem::KeyEvent( unsigned char key, int state, int x, int y) {
 	assert(m_pGameInterface);
+    
+    printf ("System: key = %c (%d)\n", key, key);
+    
+#if MACOSX
+    const char escape_key = 0;
+#else
+    const char escape_key = 27;
+#endif
+    
 
-	if ( ( key == 27 ) && ( state == 1 ) ) { //ESC
+	if ( ( key == escape_key ) && ( state == 1 ) ) { //ESC
 		Platform::toggleGrabMouse();
 		return RESULT_OK;
 	}
-
+    
 	if ( m_pGameInterface ) {
 		m_pGameInterface->OnKeyEvent(key, state, x, y);
 	}
 
+    if ( key == 81 && state == 1 ) //quit
+    {
+        Platform::setActive(false); //Tell the system to shutdown
+    }
+    
 	return RESULT_OK;
 }
 
