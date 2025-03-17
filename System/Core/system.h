@@ -29,6 +29,8 @@ public:
 			__asm mov eax, 01H;
 			__asm cpuid;
 			__asm mov nTemp, edx; //grab the EDX register
+            #elif MACOSX
+            nTemp = 0; //TODO: implement this for OSX
 			#elif __GNUC__
 			asm ("cpuid"
 			: "=d" (nTemp)
