@@ -1608,6 +1608,13 @@ GEN_RESULT IVideoInterface3D::Start2D(){
 	return RESULT_OK;
 }
 
+GEN_RESULT IVideoInterface3D::End2D(){
+    glDisable(GL_TEXTURE_2D);
+    glDisable(GL_BLEND);
+    
+    return RESULT_OK;
+}
+
 GEN_RESULT IVideoInterface3D::BeginScene() {
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);//Clear the screen

@@ -60,6 +60,7 @@ public:
 	
 	virtual GEN_RESULT	Start3D();
 	virtual GEN_RESULT	Start2D();
+    virtual GEN_RESULT  End2D();
 	virtual GEN_RESULT	BeginScene();
 	virtual GEN_RESULT	EndScene();
 	

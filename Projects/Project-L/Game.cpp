@@ -54,15 +54,15 @@ int MyGame::OnStartup(SympSystem* pSystem)
 
 		prim[i].verts[0].vPos.Set(0.0f, 0.0f, 0.0f);
 		prim[i].verts[0].vTexCoords.Set(0.0f, 0.0f);
-		prim[i].verts[0].vColor.Set(0.0f, 1.0f, 1.0f, 1.0f);
+		prim[i].verts[0].vColor.Set(1.0f, 1.0f, 1.0f, 1.0f);
 
 		prim[i].verts[1].vPos.Set(pos_size, 0.0f, 0.0f);
 		prim[i].verts[1].vTexCoords.Set(1.0f, 0.0f);
-		prim[i].verts[1].vColor.Set(1.0f, 1.0f, 0.0f, 1.0f);
+		prim[i].verts[1].vColor.Set(1.0f, 1.0f, 1.0f, 1.0f);
 
 		prim[i].verts[2].vPos.Set(pos_size, pos_size, 0.0f);
 		prim[i].verts[2].vTexCoords.Set(1.0f, 1.0f);
-		prim[i].verts[2].vColor.Set(1.0f, 0.0f, 1.0f, 1.0f);
+		prim[i].verts[2].vColor.Set(1.0f, 1.0f, 1.0f, 1.0f);
 
 		prim[i].verts[3].vPos.Set(0.0f, pos_size, 0.0f);
 		prim[i].verts[3].vTexCoords.Set(0.0f, 1.0f);
@@ -202,7 +202,7 @@ void MyGame::OnRender(float elapsed){
         char buf3[64];
 		sprintf(buf3, "Vel: %0.3f, %0.3f, %0.3f -> sp: %0.3f", g_Player.GetVelocity().x, g_Player.GetVelocity().y, g_Player.GetVelocity().z, g_Player.GetSpeed());
         pVideoInterface3D->RenderText(0, buf3, 0.0f, 50.0f);
-
+            
 		/*
 		Matrix4x4& mat = g_Camera.m_ViewPort.rRotation;
 		
@@ -219,6 +219,8 @@ void MyGame::OnRender(float elapsed){
 		pVideoInterface3D->RenderText(0, isOrtho ? "Ortho" : "NonOrtho", 0.0f, offset + 80.0f);
         */
 		}
+        
+        pVideoInterface3D->End2D();
 		
 
 		pVideoInterface3D->EndScene();
