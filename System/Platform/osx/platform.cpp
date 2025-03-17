@@ -19,6 +19,8 @@ static void cursor_position_callback(GLFWwindow* window, double xpos, double ypo
 namespace Platform {
     
     GLFWwindow* window = nullptr;
+    bool mouse_grab = false;
+    bool active = false;
 
 	void sleep(long seconds, long milliseconds) {} //stub
 	int createWindow(char *title, int width, int height, int bpp, bool fullscreen)
@@ -54,10 +56,14 @@ namespace Platform {
         printf ( "Renderer: %s\n", openGLRenderer );
         printf ( "OpenGL version supported: %s\n", openGLVersion );
         
+        active = true;
+        
         return 0;
     }
 	int closeWindow()
     {
+        printf("Platform::closeWindow\n");
+        active = false;
         glfwTerminate();
         return 0;
     }
@@ -79,9 +85,21 @@ namespace Platform {
     {
         printf("Ungrab mouse");
     }
-	void toggleGrabMouse() {}
-	bool getActive() { return true; }
-	void setActive( bool active ) {}
+	void toggleGrabMouse()
+    {
+        mouse_grab = !mouse_grab;
+        printf("Toggle grab mouse: %s\n", mouse_grab ? "Enabled" : "Disabled");
+        if ( mouse_grab )
+        {
+            glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+        }
+        else
+        {
+            glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+        }
+    }
+	bool getActive() { return active; }
+    void setActive( bool _active ) { active = _active; }
 
 	void* getWindowHandle() { return (void*)0; }
 }

@@ -94,6 +94,8 @@ void MyGame::OnShutdown(){
 	for(int i = 0; i < NUM_PRIMS; ++i){
 		free(prim[i].verts);
 	}
+    
+    g_pCoreSystem->TermInterfaces( FLAG_VIDEO_3D | FLAG_INPUT );
 }
 
 #define SQUARE( x ) ( x * x )
@@ -238,7 +240,7 @@ void MyGame::OnInputEvent(){
 }
 
 void MyGame::OnKeyEvent(unsigned char key, int state, int x, int y) {
-	//printf("Key %c, state: %d\n", key, state);
+	printf("Key %c(%d), state: %d\n", key, key, state);
 
 	if( key == 'w' || key == 'W' || key == 87 ) {
 		if ( state ) {
@@ -313,13 +315,16 @@ void MyGame::OnKeyEvent(unsigned char key, int state, int x, int y) {
 	}
 
 	//esc...
+    /* //System is already doing this...
 	if ( key == 27 && state )
 	{
 		//toggle capture mouse...
 		IInputInterface* input = g_pCoreSystem->GetInputInterface();
 		input->GrabMouse( true );
+        printf("Game: Grab mouse");
 		
 	}
+    */
 }
 
 void MyGame::OnMouseClick(EMouseButton button, int state, int x, int y) {

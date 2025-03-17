@@ -851,6 +851,7 @@ GEN_RESULT IVideoInterface3D::Init(void* hWnd, uint32 nWidth, uint32 nHeight, ui
 
 GEN_RESULT IVideoInterface3D::Term() {
 
+    printf("IVideoInterface3D::Term\n");
 	//unbind..
 	glBindTexture(GL_TEXTURE_2D, 0);   // 2d texture (x and y size)
 
